@@ -1,14 +1,22 @@
-# Self-Driving Car Capstone Project
+# Programming a Real Self-Driving Car
 
 This is the final project of the [Udacity](https://www.udacity.com) [Self-Driving Car Nanodegree](https://www.udacity.com/course/self-driving-car-engineer-nanodegree--nd0013): Programming a Real Self-Driving Car. 
 
 For this project, I wrote ROS nodes to implement core functionality of the autonomous vehicle system, including traffic light detection, control, and waypoint following. 
 
+# Project Specification
+
+Section | Criteria | Specification | Status
+:--- | :--- | :--- | :---
+**Running the Code** | The code is built successfully and connects to the simulator. | Running `catkin_make`, source devel/setup.sh and roslaunch [launch/styx.launch](ros/launch/styx.launch) within the [ros](ros) directory results in no errors and allows the program to connect to the simulator. | Open 
+**Control and Planning** | Waypoints are published to plan Carla’s route around the track. | Waypoints should be published to `/final_waypoints` to plan the vehicle’s path around the track. No unnecessary moves (excessive lane changes, unnecessary turning, unprompted stops) should occur. **Acceleration** should not exceed `10 m/s^2` and **jerk** should not exceed `10 m/s^3`. The top speed of the vehicle is limited to the km/h velocity set by the `velocity` `rosparam` in `waypoint_loader`. | Open
+| | Controller commands are published to operate Carla’s throttle, brake, and steering. | `dbw_node.py` has been implemented to calculate and provide appropriate throttle, brake, and steering commands. The commands are published to `/vehicle/throttle_cmd`, `/vehicle/brake_cmd` and `/vehicle/steering_cmd`, as applicable. | Open
+**Successful Navigation** | Successfully navigate the full track more than once. | The vehicle is able to complete more than one full loop of the track without running off road or any other navigational issues (incorrect turns, random stops, teleportation, etc.). | Open
+
+
 # System Architecture
 
-The following is a system architecture diagram showing the ROS nodes and topics used in the project. The [Code Structure section](#code-structure) below provides a summary of the ROS nodes and topics shown in the diagram. 
-
-
+The following is a system architecture diagram showing the ROS nodes and topics used in the project. The [Code Structure section](#code-structure) below provides a summary of the ROS nodes and topics shown in the diagram.
 
 ![](images/system_architecture.png)
 
