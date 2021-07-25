@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-
+import numpy as np
 import rospy
 from geometry_msgs.msg import PoseStamped
+from scipy.spatial import KDTree
 from styx_msgs.msg import Lane, Waypoint
 
 import math
@@ -38,14 +39,68 @@ class WaypointUpdater(object):
 
         # TODO: Add other member variables you need below
 
-        rospy.spin()
+        self.pose = None
+        self.base_waypoints = None
+        self.waypoints_2d = None
+        self.waypoint_tree = None
+
+        #rospy.spin()
+        self.loop()
+
+    def loop(self):
+        # TODO: Implemented
+        rate = rospy.Rate(50)  # 50 Hz
+
+        while not rospy.is_shutdown():
+            if self.pose and self.base_waypoints:
+                # Get closest waypoint
+                closest_waypoint_idx = self.get_closest_waypoint_idx()
+                self.publish_Waypoints(closest_waypoint_idx)
+            rate.sleep()
+
+    def get_closest_waypoint_id(self):
+        # TODO: Implemented
+        x = self.pose.pose.position.x
+        y = self.pose.pose.position.y
+        closest_idx = self.waypoint_tree.query([x, y], 1)[1]
+
+        # Check if closest is ahead or behind vehicle
+        closest_coord = self.waypoints_2d[closest_idx]
+        prev_coord = self.waypoints_2d[closest_idx-1]
+
+        # Equation for hyperplane through closest_coords
+        cl_vect = np.array(closest_coord)
+        prev_vect = np.array(prev_coord)
+        pos_vect = np.array([x, y])
+
+        val = np.dot(cl_vect-prev_vect, pos_vect-cl_vect)
+
+        if val > 0:
+            closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
+
+        return closest_idx
+
+    def publish_waypoints(self, closest_idx):
+        # TODO: Implemented
+        lane = Lane()
+        lane.header = self.base_waypoints.header
+        lane.wayopints = self.base_waypoints.waypoints[closest_idx:closest_idx + LOOKAHEAD_WPS]
+        self.final_waypoints_pub.publish(lane)
 
     def pose_cb(self, msg):
-        # TODO: Implement
-        pass
+        # TODO: Implemented
+        self.pose = msg
 
     def waypoints_cb(self, waypoints):
-        # TODO: Implement
+        # TODO: Implemented
+        self.base_waypoints = waypoints
+
+        if not self.waypoints_2d:
+            self.waypoints_2d = [
+                [waypoint.pose.pose.position.x, waypoint.pose.pose.position.y]
+                for waypoint in waypoints.waypoints
+            ]
+            self.waypoint_tree = KDTree(self.waypoints_2d)
         pass
 
     def traffic_cb(self, msg):
