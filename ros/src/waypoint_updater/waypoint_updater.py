@@ -58,7 +58,7 @@ class WaypointUpdater(object):
                 self.publish_Waypoints(closest_waypoint_idx)
             rate.sleep()
 
-    def get_closest_waypoint_id(self):
+    def get_closest_waypoint_idx(self):
         # TODO: Implemented
         x = self.pose.pose.position.x
         y = self.pose.pose.position.y
