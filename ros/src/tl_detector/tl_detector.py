@@ -58,7 +58,13 @@ class TLDetector(object):
 
     def waypoints_cb(self, waypoints):
         self.waypoints = waypoints
-        self.waypoint_tree = KDTree(self.waypoints)
+
+        if not self.waypoints:
+            self.waypoints = [
+                [waypoint.pose.pose.position.x, waypoint.pose.pose.position.y]
+                for waypoint in waypoints.waypoints
+            ]
+            self.waypoint_tree = KDTree(self.waypoints)
 
     def traffic_cb(self, msg):
         self.lights = msg.lights
