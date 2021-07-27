@@ -4,14 +4,56 @@ This is the final project of the [Udacity](https://www.udacity.com) [Self-Drivin
 
 For this project, I wrote ROS nodes to implement core functionality of the autonomous vehicle system, including traffic light detection, control, and waypoint following. 
 
+![](images/car_on_highway.png)
+
 # Project Specification
 
 Section | Criteria | Specification | Status
 :--- | :--- | :--- | :---
-**Running the Code** | The code is built successfully and connects to the simulator. | Running `catkin_make`, source devel/setup.sh and roslaunch [launch/styx.launch](ros/launch/styx.launch) within the [ros](ros) directory results in no errors and allows the program to connect to the simulator. | Open 
-**Control and Planning** | Waypoints are published to plan Carla’s route around the track. | Waypoints should be published to `/final_waypoints` to plan the vehicle’s path around the track. No unnecessary moves (excessive lane changes, unnecessary turning, unprompted stops) should occur. **Acceleration** should not exceed `10 m/s^2` and **jerk** should not exceed `10 m/s^3`. The top speed of the vehicle is limited to the km/h velocity set by the `velocity` `rosparam` in `waypoint_loader`. | Open
-| | Controller commands are published to operate Carla’s throttle, brake, and steering. | `dbw_node.py` has been implemented to calculate and provide appropriate throttle, brake, and steering commands. The commands are published to `/vehicle/throttle_cmd`, `/vehicle/brake_cmd` and `/vehicle/steering_cmd`, as applicable. | Open
-**Successful Navigation** | Successfully navigate the full track more than once. | The vehicle is able to complete more than one full loop of the track without running off road or any other navigational issues (incorrect turns, random stops, teleportation, etc.). | Open
+**Running the Code** | The code is built successfully and connects to the simulator. | Running `catkin_make`, source devel/setup.sh and roslaunch [launch/styx.launch](ros/launch/styx.launch) within the [ros](ros) directory results in no errors and allows the program to connect to the simulator. | Done 
+**Control and Planning** | Waypoints are published to plan Carla’s route around the track. | Waypoints should be published to `/final_waypoints` to plan the vehicle’s path around the track. No unnecessary moves (excessive lane changes, unnecessary turning, unprompted stops) should occur. **Acceleration** should not exceed `10 m/s^2` and **jerk** should not exceed `10 m/s^3`. The top speed of the vehicle is limited to the km/h velocity set by the `velocity` `rosparam` in `waypoint_loader`. | Done
+| | Controller commands are published to operate Carla’s throttle, brake, and steering. | `dbw_node.py` has been implemented to calculate and provide appropriate throttle, brake, and steering commands. The commands are published to `/vehicle/throttle_cmd`, `/vehicle/brake_cmd` and `/vehicle/steering_cmd`, as applicable. | Done
+**Successful Navigation** | Successfully navigate the full track more than once. | The vehicle is able to complete more than one full loop of the track without running off road or any other navigational issues (incorrect turns, random stops, teleportation, etc.).| Done
+
+# Meeting the Project Specification
+
+## Running the Code
+
+As shown in the following animated GIF, running `catkin_make`, `source devel/setup.sh` and `roslaunch launch/styx.launch` within the [ros](ros) directory results in no errors and allows the program to connect to the simulator.
+
+![](videos/running_the_code.gif)
+
+These screenshots show the parameters and nodes:
+
+Parameters | Nodes
+:---: | :---:
+![](images/vm_roslaunch_paramaters.png) | ![](images/vm_roslaunch_nodes.png)
+
+This screenshot shows the ROS program connected to the simulator:
+
+![](images/vm_and_simulator.png)
+
+## Control and Planning
+
+* Waypoints should be published to `/final_waypoints` to plan the vehicle’s path around the track. 
+* No unnecessary moves (excessive lane changes, unnecessary turning, unprompted stops) should occur. 
+* **Acceleration** does not exceed `10 m/s^2`. 
+* **jerk** does not exceed `10 m/s^3`. 
+* The vehicle does not exceed the top speed of the vehicle, which is limited to the `km/h` velocity set by the `velocity` `rosparam` in `waypoint_loader`.
+
+This extract shows the car following the waypoints for a stretch of highway. There are no unneccessary moves, and both acceleration and jerk are within the specified limits. 
+
+![](videos/navigation_extract.gif)
+
+This extract from the full video recording shows the car slowing down and stopping for a red traffic light, then driving again when the light turns green.
+
+![](videos/navigation_stop_for_red_light.gif)
+
+## Successful Navigation
+
+The following video (which I uploaded to YouTube) shows the vehicle is able to complete more than one full loop of the track without running off road or any other navigational issues (incorrect turns, random stops, teleportation, etc.).
+
+[![Full Lap demo of Self-Driving Car](https://img.youtube.com/vi/pLb1ZRcehko/0.jpg)](https://youtu.be/pLb1ZRcehko "Video of car driving autonomously for (more than) a full lap")
 
 
 # System Architecture
@@ -55,3 +97,9 @@ The `styx` and `styx_msgs` packages are used to provide a link between the simul
 
 # References
 
+* Robot Operating System. [https://www.ros.org](https://www.ros.org)
+* Aaron Brown, Stephen. Udacity: Carla Code Walkthrough tutorials.
+* Dosovitskiy, A., Ros, G., Codevilla, F., Lopez, A. and Koltun, V., 2017, October. CARLA: An open urban driving simulator. In Conference on robot learning (pp. 1-16). PMLR.
+* Reke, M., Peter, D., Schulte-Tigges, J., Schiffer, S., Ferrein, A., Walter, T. and Matheis, D., 2020, January. A self-driving car architecture in ROS2. In 2020 International SAUPEC/RobMech/PRASA Conference (pp. 1-6). IEEE.
+* Munir, F., Azam, S., Hussain, M.I., Sheri, A.M. and Jeon, M., 2018, October. Autonomous vehicle: The architecture aspect of self driving car. In Proceedings of the 2018 International Conference on Sensors, Signal and Image Processing (pp. 1-5).
+* Burnett, K., Schimpe, A., Samavi, S., Gridseth, M., Liu, C.W., Li, Q., Kroeze, Z. and Schoellig, A.P., 2019, May. Building a winning self-driving car in six months. In 2019 International Conference on Robotics and Automation (ICRA) (pp. 9583-9589). IEEE.

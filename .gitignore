@@ -2,3 +2,6 @@
 .idea/
 .DS_Store
 
+videos/*.mov
+videos/*.mp4
+
