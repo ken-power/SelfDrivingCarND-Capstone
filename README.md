@@ -35,7 +35,7 @@ This screenshot shows the ROS program connected to the simulator:
 
 ## Control and Planning
 
-* Waypoints should be published to `/final_waypoints` to plan the vehicle’s path around the track. 
+* Waypoints are published to `/final_waypoints` to plan the vehicle’s path around the track. 
 * No unnecessary moves (excessive lane changes, unnecessary turning, unprompted stops) should occur. 
 * **Acceleration** does not exceed `10 m/s^2`. 
 * **jerk** does not exceed `10 m/s^3`. 
@@ -98,7 +98,13 @@ The `styx` and `styx_msgs` packages are used to provide a link between the simul
 # References
 
 * Robot Operating System. [https://www.ros.org](https://www.ros.org)
+* The Construct. [What is catkin_make & how do you use it?](https://www.theconstructsim.com/ros-5-mins-011-catkin_make-use/)
+* [ROS Kinetic Cheatsheet](https://w3.cs.jmu.edu/spragunr/CS354_S19/handouts/ROSCheatsheet.pdf)
+* Chris Gundling. [Tiny-YOLO-v2 ROS Node for Traffic Light Detection](https://github.com/chrisgundling/YoloLight)
+* John Fuller. [How Drive-by-wire Technology Works](https://auto.howstuffworks.com/car-driving-safety/safety-regulatory-devices/drive-by-wire.htm)  
+* Moshchuk, N., Chen, S.K., Zagorski, C. and Chatterjee, A., 2013, November. [Path Planning for Collision Avoidance Maneuver](https://www.researchgate.net/publication/267596342_Path_Planning_for_Collision_Avoidance_Maneuver). In ASME International Mechanical Engineering Congress and Exposition (Vol. 56420, p. V013T14A016). American Society of Mechanical Engineers.
 * Aaron Brown, Stephen. Udacity: Carla Code Walkthrough tutorials.
+* Daniel Stang. [Step by Step TensorFlow Object Detection API Tutorial — Part 1: Selecting a Model](https://medium.com/@WuStangDan/step-by-step-tensorflow-object-detection-api-tutorial-part-1-selecting-a-model-a02b6aabe39e).
 * Dosovitskiy, A., Ros, G., Codevilla, F., Lopez, A. and Koltun, V., 2017, October. CARLA: An open urban driving simulator. In Conference on robot learning (pp. 1-16). PMLR.
 * Reke, M., Peter, D., Schulte-Tigges, J., Schiffer, S., Ferrein, A., Walter, T. and Matheis, D., 2020, January. A self-driving car architecture in ROS2. In 2020 International SAUPEC/RobMech/PRASA Conference (pp. 1-6). IEEE.
 * Munir, F., Azam, S., Hussain, M.I., Sheri, A.M. and Jeon, M., 2018, October. Autonomous vehicle: The architecture aspect of self driving car. In Proceedings of the 2018 International Conference on Sensors, Signal and Image Processing (pp. 1-5).
